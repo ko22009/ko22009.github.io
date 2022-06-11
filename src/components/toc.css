@@ -1,0 +1,32 @@
+.toc {
+    position: sticky;
+    max-width: 250px;
+    top: 5rem;
+    right: 0;
+    z-index: 2;
+    height: calc(100vh - 7rem);
+    overflow-y: auto;
+}
+
+.toc blockquote {
+    margin-top: 0;
+    border-width: 1px;
+    border-color: var(--color-light);
+}
+
+.toc ul.toc-list > li {
+    list-style-type: none;
+    font-size: 13px;
+}
+
+.toc ul.toc-list > li > a {
+    color: #c2c2c2;
+    text-decoration: none;
+    border-bottom: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+    .toc {
+        display: none;
+    }
+}
