@@ -6,8 +6,8 @@ import Seo from "../components/seo";
 import Toc from "../components/toc";
 import cn from "classnames";
 import { useEffect } from "react";
-import { DiscussionEmbed, CommentCount } from "disqus-react";
-import { ClapButton } from "@lyket/react";
+import { DiscussionEmbed } from "disqus-react";
+import PostInfo from "../components/post-info";
 
 const BlogPostTemplate = ({ data, location, pageContext }) => {
   const post = data.mdx;
@@ -17,22 +17,7 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
   const Subheader = () => (
     <>
       <h1 itemProp="headline">{post.frontmatter.title}</h1>
-      <div className="data">
-        <span>{post.frontmatter.date}</span>
-        <span>|</span>
-        <CommentCount
-          shortname={disqusConfig.shortname}
-          config={disqusConfig.config}
-        >
-          Comments
-        </CommentCount>
-        <span>|</span>
-        <ClapButton
-          component={ClapButton.templates.Medium}
-          id={post.slug.slice(0, -1)}
-          namespace="ko2-blog-post"
-        />
-      </div>
+      <PostInfo node={post} />
     </>
   );
 
