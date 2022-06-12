@@ -7,3 +7,10 @@ import "./src/style.css";
 
 // Highlighting for code blocks
 import "prismjs/themes/prism.css";
+
+import * as React from "react";
+import RootLayout from "./src/components/RootLayout";
+
+export const wrapRootElement = ({ element }) => (
+  <RootLayout>{element}</RootLayout>
+);

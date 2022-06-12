@@ -6,7 +6,8 @@ import Seo from "../components/seo";
 import Toc from "../components/toc";
 import cn from "classnames";
 import { useEffect } from "react";
-import { DiscussionEmbed } from "disqus-react";
+import { DiscussionEmbed, CommentCount } from "disqus-react";
+import { ClapButton } from "@lyket/react";
 
 const BlogPostTemplate = ({ data, location, pageContext }) => {
   const post = data.mdx;
@@ -16,7 +17,22 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
   const Subheader = () => (
     <>
       <h1 itemProp="headline">{post.frontmatter.title}</h1>
-      <span>{post.frontmatter.date}</span>
+      <div className="data">
+        <span>{post.frontmatter.date}</span>
+        <span>|</span>
+        <CommentCount
+          shortname={disqusConfig.shortname}
+          config={disqusConfig.config}
+        >
+          Comments
+        </CommentCount>
+        <span>|</span>
+        <ClapButton
+          component={ClapButton.templates.Medium}
+          id={post.slug.slice(0, -1)}
+          namespace="ko2-blog-post"
+        />
+      </div>
     </>
   );
 
@@ -73,14 +89,14 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
               >
                 <li>
                   {previous && (
-                    <Link to={previous.fields.slug} rel="prev">
+                    <Link to={"/" + previous.slug} rel="prev">
                       ← {previous.frontmatter.title}
                     </Link>
                   )}
                 </li>
                 <li>
                   {next && (
-                    <Link to={next.fields.slug} rel="next">
+                    <Link to={"/" + next.slug} rel="next">
                       {next.frontmatter.title} →
                     </Link>
                   )}
@@ -108,7 +124,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    mdx(fields: { slug: { eq: $slug } }) {
+    mdx(slug: { eq: $slug }) {
       id
       excerpt(pruneLength: 160)
       tableOfContents

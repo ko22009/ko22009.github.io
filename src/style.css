@@ -394,7 +394,7 @@ code[class*="language-"], pre[class*="language-"] {
 .post-list-item h2 {
   font-size: var(--fontSize-3);
   color: var(--color-main);
-  margin-bottom: var(--spacing-0);
+  margin-bottom: var(--spacing-1);
   margin-top: var(--spacing-0);
 }
 
@@ -407,6 +407,13 @@ code[class*="language-"], pre[class*="language-"] {
   font-family: var(--font-heading);
   text-decoration: none;
   font-size: var(--fontSize-2);
+}
+
+.data {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--color-main);
 }
 
 .bio {

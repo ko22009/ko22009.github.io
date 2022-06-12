@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Link, graphql } from "gatsby";
+import { CommentCount } from "disqus-react";
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import Bio from "../components/bio";
+import { ClapButton } from "@lyket/react";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
@@ -30,22 +32,40 @@ const BlogIndex = ({ data, location }) => {
       </h2>
       <ol style={{ listStyle: `none` }} id="wrapper">
         {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug;
-
+          const title = node.frontmatter.title || node.slug;
+          const disqusConfig = {
+            shortname: process.env.GATSBY_DISQUS_NAME,
+            config: { identifier: node.slug, title: title },
+          };
           return (
             <li
-              key={node.fields.slug}
+              key={node.slug}
               className="post-list-item"
               itemScope
               itemType="http://schema.org/Article"
             >
               <header>
                 <h2>
-                  <Link to={node.fields.slug} itemProp="url">
+                  <Link to={"/" + node.slug} itemProp="url">
                     <span itemProp="headline">{title}</span>
                   </Link>
                 </h2>
-                <small>{node.frontmatter.date}</small>
+                <div className="data">
+                  <span>{node.frontmatter.date}</span>
+                  <span>|</span>
+                  <CommentCount
+                    shortname={disqusConfig.shortname}
+                    config={disqusConfig.config}
+                  >
+                    Comments
+                  </CommentCount>
+                  <span>|</span>
+                  <ClapButton
+                    component={ClapButton.templates.Medium}
+                    id={node.slug.slice(0, -1)}
+                    namespace="ko2-blog-post"
+                  />
+                </div>
               </header>
               <section>
                 <p
@@ -79,9 +99,7 @@ export const pageQuery = graphql`
       edges {
         node {
           excerpt
-          fields {
-            slug
-          }
+          slug
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
