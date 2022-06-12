@@ -6,8 +6,9 @@ import Seo from "../components/seo";
 import Toc from "../components/toc";
 import cn from "classnames";
 import { useEffect } from "react";
-import { DiscussionEmbed } from "disqus-react";
 import PostInfo from "../components/post-info";
+import useCountView from "../hook/useCountView";
+import { Disqus } from "gatsby-plugin-disqus";
 
 const BlogPostTemplate = ({ data, location, pageContext }) => {
   const post = data.mdx;
@@ -20,6 +21,8 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
       <PostInfo node={post} />
     </>
   );
+
+  useCountView(post.slug, true);
 
   useEffect(() => {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -34,8 +37,8 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
   }, []);
 
   const disqusConfig = {
-    shortname: process.env.GATSBY_DISQUS_NAME,
-    config: { identifier: post.slug, title: post.frontmatter.title },
+    identifier: post.slug,
+    title: post.frontmatter.title,
   };
 
   return (
@@ -89,7 +92,7 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
               </ul>
             </nav>
             <hr />
-            <DiscussionEmbed {...disqusConfig} />
+            <Disqus config={disqusConfig} />
           </div>
           <nav className={cn("toc", !post.tableOfContents.items && "hide")}>
             <Toc post={post.tableOfContents} />

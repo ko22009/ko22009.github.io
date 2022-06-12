@@ -80,5 +80,26 @@ module.exports = {
       },
     },
     "gatsby-plugin-react-helmet",
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `blog-ko2`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-firebase-v9.0",
+      options: {
+        credentials: {
+          apiKey: "AIzaSyAOtZHPtZl3zsoVjsUjzDnQClRThlRewmM",
+          authDomain: "blog-ko2.firebaseapp.com",
+          databaseURL: "https://blog-ko2.firebaseio.com",
+          projectId: "blog-ko2",
+          storageBucket: "blog-ko2.appspot.com",
+          messagingSenderId: "516385271403",
+          appId: "1:516385271403:web:ce7a5ae7073b596c0f4b2e",
+          measurementId: "G-5QKB153WBS",
+        },
+      },
+    },
   ],
 };

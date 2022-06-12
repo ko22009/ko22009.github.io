@@ -1,29 +1,35 @@
 import * as React from "react";
-import { CommentCount } from "disqus-react";
 import { ClapButton } from "@lyket/react";
+import useCountView from "../hook/useCountView";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faComment } from "@fortawesome/free-solid-svg-icons";
+import { Medium } from "./Medium";
+import { CommentCount } from "gatsby-plugin-disqus";
 
 const PostInfo = ({ node }) => {
   const title = node.frontmatter.title || node.slug;
-  const disqusConfig = {
-    shortname: process.env.GATSBY_DISQUS_NAME,
-    config: { identifier: node.slug, title: title },
-  };
+  const count = useCountView(node.slug, false);
+  const disqusConfig = { identifier: node.slug, title: title };
+
   return (
     <div className="data">
       <span>{node.frontmatter.date}</span>
       <span>|</span>
-      <CommentCount
-        shortname={disqusConfig.shortname}
-        config={disqusConfig.config}
-      >
-        Comments
-      </CommentCount>
+      <div>
+        <CommentCount config={disqusConfig} />
+        <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faComment} />
+      </div>
       <span>|</span>
       <ClapButton
-        component={ClapButton.templates.Medium}
-        id={node.slug.slice(0, -1)}
+        component={Medium}
         namespace="ko2-blog-post"
-      />
+        id={node.slug.slice(0, -1)}
+      ></ClapButton>
+      <span>|</span>
+      <span>
+        {count}
+        <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faEye} />
+      </span>
     </div>
   );
 };
