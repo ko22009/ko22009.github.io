@@ -3,10 +3,9 @@ import { Link, graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import Bio from "../components/bio";
 
 const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`;
+  const siteTitle = "Posts | " + data.site.siteMetadata?.title;
   const posts = data.allMdx.edges;
 
   if (posts.length === 0) {
@@ -25,9 +24,6 @@ const BlogIndex = ({ data, location }) => {
   return (
     <Layout className="layout" location={location} title={siteTitle}>
       <Seo />
-      <h2>
-        <a href="/posts">Posts</a>
-      </h2>
       <ol style={{ listStyle: `none` }} id="wrapper">
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug;
@@ -59,9 +55,6 @@ const BlogIndex = ({ data, location }) => {
           );
         })}
       </ol>
-      <footer>
-        <Bio />
-      </footer>
     </Layout>
   );
 };

@@ -1,7 +1,7 @@
 .toc {
     position: sticky;
     max-width: 250px;
-    top: 5rem;
+    top: 2rem;
     right: 0;
     z-index: 2;
     height: calc(100vh - 7rem);
