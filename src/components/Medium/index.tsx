@@ -184,7 +184,7 @@ export const Medium: FC<ClapButtonTemplateComponentProps> = ({
 
   return (
     <div sx={style.root}>
-      {isCounterVisible && <div sx={style.counter}>{totalClaps}</div>}
+      <div sx={style.counter}>{totalClaps}</div>
       <div sx={style.buttonContainer}>
         <div sx={style.centeredContainer}>
           <div

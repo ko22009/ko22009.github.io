@@ -8,28 +8,28 @@ import { CommentCount } from "gatsby-plugin-disqus";
 
 const PostInfo = ({ node }) => {
   const title = node.frontmatter.title || node.slug;
-  const count = useCountView(node.slug, false);
+  const [count] = useCountView(node.slug, false);
   const disqusConfig = { identifier: node.slug, title: title };
 
   return (
     <div className="data">
-      <span>{node.frontmatter.date}</span>
-      <span>|</span>
-      <div>
-        <CommentCount config={disqusConfig} />
+      <div>{node.frontmatter.date}</div>
+      <div>|</div>
+      <div className="element-info">
+        <CommentCount placeholder={"0"} config={disqusConfig} />
         <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faComment} />
       </div>
-      <span>|</span>
+      <div>|</div>
       <ClapButton
         component={Medium}
         namespace="ko2-blog-post"
         id={node.slug.slice(0, -1)}
       ></ClapButton>
-      <span>|</span>
-      <span>
+      <div>|</div>
+      <div className="element-info">
         {count}
         <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faEye} />
-      </span>
+      </div>
     </div>
   );
 };
