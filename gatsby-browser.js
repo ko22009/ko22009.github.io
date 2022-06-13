@@ -2,7 +2,6 @@ import "typeface-ibm-plex-sans";
 import "./src/normalize.css";
 import "./src/style.css";
 import "prismjs/themes/prism.css";
-import "react-placeholder/lib/reactPlaceholder.css";
 
 import "gatsby-plugin-firebase-v9.0";
 
