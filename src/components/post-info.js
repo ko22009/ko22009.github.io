@@ -13,22 +13,19 @@ const PostInfo = ({ node }) => {
 
   return (
     <div className="data">
-      <div>{node.frontmatter.date}</div>
-      <div>|</div>
+      <div className="date">{node.frontmatter.date}</div>
       <div className="element-info">
-        <CommentCount placeholder={"0"} config={disqusConfig} />
-        <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faComment} />
+        {count}
+        <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faEye} />
       </div>
-      <div>|</div>
       <ClapButton
         component={Medium}
         namespace="ko2-blog-post"
         id={node.slug.slice(0, -1)}
       ></ClapButton>
-      <div>|</div>
       <div className="element-info">
-        {count}
-        <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faEye} />
+        <CommentCount placeholder={"0"} config={disqusConfig} />
+        <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faComment} />
       </div>
     </div>
   );

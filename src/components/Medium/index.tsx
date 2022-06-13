@@ -171,6 +171,8 @@ export const Medium: FC<ClapButtonTemplateComponentProps> = ({
     animation: animationActive
       ? `${ICON.animation} ${ICON.durationMs}ms ease forwards`
       : null,
+    fill: "#fff",
+    height: "1.6rem",
   };
 
   const baloonStyle = {

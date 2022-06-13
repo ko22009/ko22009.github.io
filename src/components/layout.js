@@ -5,7 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import useWindowSize from "../hook/useWindowSize";
 
-const Layout = ({ location, title, children, Subheader, className }) => {
+const Layout = ({
+  location,
+  title,
+  children,
+  Subheader,
+  className,
+  Footer,
+}) => {
   const rootPath = `${__PATH_PREFIX__}/`;
   const isRootPath = location.pathname === rootPath;
   let header;
@@ -66,18 +73,16 @@ const Layout = ({ location, title, children, Subheader, className }) => {
   return (
     <div className={className}>
       <div className="global-header">
-        <div className="global-wrapper" data-is-root-path={isRootPath}>
-          {header}
-        </div>
+        <div className="global-wrapper">{header}</div>
       </div>
       {Subheader && (
         <header className="bg-wrapper">
-          <div className="global-wrapper" data-is-root-path={isRootPath}>
+          <div className="global-wrapper">
             <Subheader />
           </div>
         </header>
       )}
-      <div className="global-wrapper" data-is-root-path={isRootPath}>
+      <div className="global-wrapper">
         <main>{children}</main>
         <button
           ref={buttonRef}
@@ -88,6 +93,7 @@ const Layout = ({ location, title, children, Subheader, className }) => {
           <FontAwesomeIcon icon={faArrowUp} size="1x" />
         </button>
       </div>
+      {Footer && <Footer />}
     </div>
   );
 };

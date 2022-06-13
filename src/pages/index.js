@@ -9,10 +9,23 @@ const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const posts = data.allMdx.edges;
 
+  const Footer = () => (
+    <footer>
+      <div className="global-wrapper">
+        <Bio />
+      </div>
+    </footer>
+  );
+
   if (posts.length === 0) {
     return (
-      <Layout location={location} title={siteTitle}>
-        <Seo title="All posts" />
+      <Layout
+        className="layout"
+        location={location}
+        title={siteTitle}
+        Footer={Footer}
+      >
+        <Seo />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
           directory you specified for the "gatsby-source-filesystem" plugin in
@@ -23,15 +36,17 @@ const BlogIndex = ({ data, location }) => {
   }
 
   return (
-    <Layout className="layout" location={location} title={siteTitle}>
+    <Layout
+      className="layout"
+      location={location}
+      title={siteTitle}
+      Footer={Footer}
+    >
       <Seo />
-      <h2>
+      <h2 className="title">
         <a href="/posts">Posts</a>
       </h2>
       <Posts posts={posts} />
-      <footer>
-        <Bio />
-      </footer>
     </Layout>
   );
 };

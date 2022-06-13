@@ -285,6 +285,10 @@ td {
   border: 1px solid var(--color-primary);
 }
 
+.title {
+  margin-top: var(--spacing-5);
+}
+
 footer {
   color: var(--color-text);
   font-style: italic;
@@ -325,7 +329,7 @@ code[class*="language-"], pre[class*="language-"] {
 
 .layout .global-wrapper {
   padding-top: var(--spacing-0);
-  padding-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-0);
 }
 
 .global-header .global-wrapper {
@@ -388,8 +392,15 @@ code[class*="language-"], pre[class*="language-"] {
 }
 
 .post-list-item {
-  margin: var(--spacing-8);
+  margin: var(--spacing-5);
   margin-left: 0;
+}
+
+@media (max-width: 42rem) {
+  .post-list-item {
+    margin: var(--spacing-4);
+    margin-left: 0;
+  }
 }
 
 .post-list-item p {
@@ -403,10 +414,6 @@ code[class*="language-"], pre[class*="language-"] {
   margin-top: var(--spacing-0);
 }
 
-.post-list-item header {
-  margin-bottom: var(--spacing-2);
-}
-
 .header-link-home {
   font-weight: var(--fontWeight-bold);
   font-family: var(--font-heading);
@@ -417,13 +424,57 @@ code[class*="language-"], pre[class*="language-"] {
 .data {
   display: flex;
   align-items: center;
-  gap: 5px;
   color: var(--color-main);
 }
 
 .bio {
   display: flex;
   align-items: center;
+}
+
+.data > div:not(:first-child):before {
+  content: "";
+  border: 1px solid #fff;
+  align-self: center;
+  margin: 10px;
+  height: 1rem;
+}
+
+@media (max-width: 42rem) {
+  .data > div:nth-child(2):before {
+    border: none;
+    margin: 0;
+  }
+  footer:before {
+    content: " ";
+    border-top: 3px solid var(--color-text);
+    padding-top: var(--spacing-4);
+    width: 100px;
+    display: block;
+  }
+  .bio {
+    margin-top: 0;
+    margin-bottom: var(--spacing-4);
+    flex-direction: column;
+    gap: var(--spacing-2);
+    padding: 0;
+    text-align: center;
+    border: 0;
+    margin-left: 4px;
+  }
+  .links {
+    justify-content: center;
+  }
+  .data {
+    flex-flow: wrap;
+    row-gap: 0;
+  }
+  .data .date {
+    flex: 0 0 100%;
+  }
+  .post-list-item h2 {
+     margin-bottom: var(--spacing-2);
+   }
 }
 
 .bio p {
