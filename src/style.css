@@ -367,7 +367,7 @@ code[class*="language-"], pre[class*="language-"] {
 
 @media only screen and (max-width: 1100px) {
   .content {
-    grid-template-columns: 1fr;
+    display: block;
   }
 }
 
@@ -455,14 +455,13 @@ code[class*="language-"], pre[class*="language-"] {
     padding-bottom: var(--spacing-4);
   }
   .bio {
-    margin-top: 0;
+    margin: 0;
     margin-bottom: var(--spacing-4);
     flex-direction: column;
     gap: var(--spacing-2);
     padding: 0;
     text-align: center;
     border: 0;
-    margin-left: 4px;
   }
   .links {
     justify-content: center;
@@ -548,7 +547,7 @@ code[class*="language-"], pre[class*="language-"] {
 @media (max-width: 42rem) {
   blockquote {
     padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);
-    margin: 4px 4px 4px var(--spacing-0);
+    margin: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-0);
   }
   ul,
   ol {
