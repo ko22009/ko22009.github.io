@@ -292,6 +292,7 @@ td {
 footer {
   color: var(--color-text);
   font-style: italic;
+  padding-bottom: var(--spacing-5);
 }
 
 /* Link */
@@ -338,10 +339,10 @@ code[class*="language-"], pre[class*="language-"] {
 
 @media (max-width: 42rem) {
   .global-wrapper {
-    padding: var(--spacing-4) var(--spacing-4);
+    padding: var(--spacing-6) var(--spacing-6);
   }
   .global-header .global-wrapper {
-    padding: var(--spacing-4) var(--spacing-4);
+    padding: var(--spacing-6) var(--spacing-6);
   }
 }
 
@@ -451,6 +452,9 @@ code[class*="language-"], pre[class*="language-"] {
     padding-top: var(--spacing-4);
     width: 100px;
     display: block;
+  }
+  footer {
+    padding-bottom: var(--spacing-4);
   }
   .bio {
     margin-top: 0;
