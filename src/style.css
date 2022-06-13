@@ -91,15 +91,20 @@ body {
   overflow-wrap: break-word;
 }
 
+.bg-wrapper {
+  background: var(--color-button);
+  padding: var(--spacing-6) 0;
+}
+
 @media (max-width: 42rem) {
   body {
     font-size: 14px;
   }
+  .bg-wrapper {
+    padding: var(--spacing-4) 0;
+  }
 }
 
-.bg-wrapper {
-  background: var(--color-button);
-}
 
 hr {
   background: var(--color-light);
@@ -325,24 +330,23 @@ code[class*="language-"], pre[class*="language-"] {
 .global-wrapper {
   margin: var(--spacing-0) auto;
   max-width: var(--maxWidth-5xl);
-  padding: var(--spacing-6) var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-4);
 }
 
-.layout .global-wrapper {
-  padding-top: var(--spacing-0);
-  padding-bottom: var(--spacing-0);
+.global-wrapper h1 {
+  margin: 0;
 }
 
 .global-header .global-wrapper {
-  padding: var(--spacing-8) var(--spacing-4);
+  padding: var(--spacing-6) var(--spacing-4) ;
 }
 
 @media (max-width: 42rem) {
   .global-wrapper {
-    padding: var(--spacing-6) var(--spacing-6);
+    padding: var(--spacing-0) var(--spacing-6);
   }
   .global-header .global-wrapper {
-    padding: var(--spacing-6) var(--spacing-6);
+    padding: var(--spacing-4) var(--spacing-6);
   }
 }
 
@@ -350,6 +354,7 @@ code[class*="language-"], pre[class*="language-"] {
   display: grid;
   grid-template-columns: 6fr 2fr;
   gap: 20px;
+  padding: var(--spacing-6) var(--spacing-0) ;
 }
 
 .content-full {
@@ -365,13 +370,6 @@ code[class*="language-"], pre[class*="language-"] {
     grid-template-columns: 1fr;
   }
 }
-
-/* Hide Table of Content when screen is smaller than 1440px
-@media only screen and (max-width: 1400px) {
-  .global-wrapper {
-    margin-left: var(--spacing-10);
-  }
-}*/
 
 .global-header {
   background: var(--color-primary);

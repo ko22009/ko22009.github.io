@@ -5,9 +5,13 @@ import Posts from "../components/posts";
 import Seo from "../components/seo";
 
 const BlogIndex = ({ data, location }) => {
-  const siteTitle = "Posts | " + data.site.siteMetadata?.title;
+  const siteTitle = data.site.siteMetadata?.title;
   const posts = data.allMdx.edges;
-
+  const Subheader = () => (
+    <>
+      <h1 itemProp="headline">Posts</h1>
+    </>
+  );
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -22,7 +26,12 @@ const BlogIndex = ({ data, location }) => {
   }
 
   return (
-    <Layout className="layout" location={location} title={siteTitle}>
+    <Layout
+      Subheader={Subheader}
+      className="layout"
+      location={location}
+      title={siteTitle}
+    >
       <Seo />
       <Posts posts={posts} />
     </Layout>
