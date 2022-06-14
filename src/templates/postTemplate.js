@@ -88,7 +88,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
                 <li>
                   {next && (
                     <Link
-                      to={`/posts/${previous.fields.category}/${previous.slug}`}
+                      to={`/posts/${next.fields.category}/${next.slug}`}
                       rel="next"
                     >
                       {next.frontmatter.title} →
