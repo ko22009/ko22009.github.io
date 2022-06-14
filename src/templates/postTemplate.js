@@ -10,7 +10,7 @@ import PostInfo from "../components/post-info";
 import useCountView from "../hook/useCountView";
 import { Disqus } from "gatsby-plugin-disqus";
 
-const BlogPostTemplate = ({ data, location, pageContext }) => {
+const PostTemplate = ({ data, location, pageContext }) => {
   const post = data.mdx;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const { previous, next } = pageContext;
@@ -63,7 +63,7 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
             !post.tableOfContents.items && "content-full"
           )}
         >
-          <div id="wrapper">
+          <div>
             <MDXRenderer>{post.body}</MDXRenderer>
             <nav className="blog-post-nav">
               <ul
@@ -77,14 +77,20 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
               >
                 <li>
                   {previous && (
-                    <Link to={"/" + previous.slug} rel="prev">
+                    <Link
+                      to={`/posts/${previous.fields.category}/${previous.slug}`}
+                      rel="prev"
+                    >
                       ← {previous.frontmatter.title}
                     </Link>
                   )}
                 </li>
                 <li>
                   {next && (
-                    <Link to={"/" + next.slug} rel="next">
+                    <Link
+                      to={`/posts/${previous.fields.category}/${previous.slug}`}
+                      rel="next"
+                    >
                       {next.frontmatter.title} →
                     </Link>
                   )}
@@ -103,7 +109,7 @@ const BlogPostTemplate = ({ data, location, pageContext }) => {
   );
 };
 
-export default BlogPostTemplate;
+export default PostTemplate;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -122,6 +128,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        tags
       }
     }
   }

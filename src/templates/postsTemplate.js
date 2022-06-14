@@ -4,9 +4,10 @@ import Layout from "../components/layout";
 import Posts from "../components/posts";
 import Seo from "../components/seo";
 
-const BlogIndex = ({ data, location }) => {
+const PostsTemplate = ({ data, pageContext: { category } }) => {
   const siteTitle = data.site.siteMetadata?.title;
   const posts = data.allMdx.edges;
+  const location = `/posts/${category}`;
   const Subheader = () => (
     <>
       <h1 itemProp="headline">Posts</h1>
@@ -38,24 +39,31 @@ const BlogIndex = ({ data, location }) => {
   );
 };
 
-export default BlogIndex;
+export default PostsTemplate;
 
 export const pageQuery = graphql`
-  query {
+  query allMdx($category: String) {
     site {
       siteMetadata {
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(
+      filter: { fields: { category: { eq: $category } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       edges {
         node {
           excerpt
           slug
+          fields {
+            category
+          }
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
             description
+            tags
           }
         }
       }

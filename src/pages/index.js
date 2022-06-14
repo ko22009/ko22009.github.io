@@ -7,7 +7,7 @@ import Posts from "../components/posts";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
-  const posts = data.allMdx.edges;
+  const groups = data.allMdx.group;
 
   const Footer = () => (
     <footer>
@@ -17,24 +17,6 @@ const BlogIndex = ({ data, location }) => {
     </footer>
   );
 
-  if (posts.length === 0) {
-    return (
-      <Layout
-        className="layout"
-        location={location}
-        title={siteTitle}
-        Footer={Footer}
-      >
-        <Seo />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    );
-  }
-
   return (
     <Layout
       className="layout"
@@ -43,10 +25,16 @@ const BlogIndex = ({ data, location }) => {
       Footer={Footer}
     >
       <Seo />
-      <h2 className="title">
-        <a href="/posts">Posts</a>
-      </h2>
-      <Posts posts={posts} />
+      {groups.map((group) => (
+        <div key={group.fieldValue}>
+          <h2 className="title">
+            <a href={`/posts/${group.fieldValue}`}>
+              {group.fieldValue.toUpperCase()}
+            </a>
+          </h2>
+          <Posts posts={group.edges} />
+        </div>
+      ))}
     </Layout>
   );
 };
@@ -61,14 +49,22 @@ export const pageQuery = graphql`
       }
     }
     allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          slug
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
+      group(field: fields___category) {
+        fieldValue
+        totalCount
+        edges {
+          node {
+            excerpt
+            slug
+            fields {
+              category
+            }
+            frontmatter {
+              date(formatString: "MMMM DD, YYYY")
+              title
+              description
+              tags
+            }
           }
         }
       }

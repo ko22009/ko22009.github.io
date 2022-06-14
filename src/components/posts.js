@@ -4,20 +4,17 @@ import PostInfo from "./post-info";
 
 const Posts = ({ posts }) => {
   return (
-    <ol style={{ listStyle: `none` }} id="wrapper">
+    <ol className="post-list">
       {posts.map(({ node }) => {
         const title = node.frontmatter.title || node.slug;
-
         return (
-          <li
-            key={node.slug}
-            className="post-list-item"
-            itemScope
-            itemType="http://schema.org/Article"
-          >
+          <li key={node.slug} itemScope itemType="http://schema.org/Article">
             <header>
               <h2>
-                <Link to={"/" + node.slug} itemProp="url">
+                <Link
+                  to={`/posts/${node.fields.category}/${node.slug}`}
+                  itemProp="url"
+                >
                   <span itemProp="headline">{title}</span>
                 </Link>
               </h2>

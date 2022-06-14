@@ -243,10 +243,6 @@ li > p {
   margin-bottom: var(--spacing-4);
 }
 
-li *:last-child {
-  margin-bottom: var(--spacing-0);
-}
-
 li > ul {
   margin-left: var(--spacing-8);
   margin-top: var(--spacing-2);
@@ -291,7 +287,11 @@ td {
 }
 
 .title {
-  margin-top: var(--spacing-5);
+  margin-top: var(--spacing-6);
+  background: var(--color-button);
+  padding: var(--spacing-4);
+  display: inline-block;
+  margin-bottom: 0;
 }
 
 footer {
@@ -315,6 +315,20 @@ code[class*="language-"], pre[class*="language-"] {
   background: var(--color-secondary) !important;
   color: var(--color-text) !important;
   text-shadow: none !important;
+}
+
+.tag {
+  padding: var(--spacing-1) var(--spacing-4);
+  background: var(--color-button);
+  display: inline-block;
+  border-radius: var(--spacing-1);
+  user-select: none;
+  margin-right: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.bg-wrapper .tag {
+  background: var(--color-button-hover);
 }
 
 .token.punctuation {
@@ -390,23 +404,24 @@ code[class*="language-"], pre[class*="language-"] {
   margin: 0;
 }
 
-.post-list-item {
-  margin: var(--spacing-5);
+.post-list {
+  list-style: none;
   margin-left: 0;
 }
 
-@media (max-width: 42rem) {
-  .post-list-item {
-    margin: var(--spacing-4);
-    margin-left: 0;
-  }
+.post-list li {
+  margin: var(--spacing-5) 0;
 }
 
-.post-list-item p {
+.post-list li:last-child {
+  margin-bottom: 0;
+}
+
+.post-list p {
   margin-bottom: var(--spacing-0);
 }
 
-.post-list-item h2 {
+.post-list h2 {
   font-size: var(--fontSize-3);
   color: var(--color-main);
   margin-bottom: var(--spacing-1);
@@ -447,7 +462,8 @@ code[class*="language-"], pre[class*="language-"] {
   footer:before {
     content: " ";
     border-top: 3px solid var(--color-text);
-    padding-top: var(--spacing-4);
+    padding-top: var(--spacing-5);
+    margin-top: var(--spacing-5);
     width: 100px;
     display: block;
   }
@@ -473,7 +489,7 @@ code[class*="language-"], pre[class*="language-"] {
   .data .date {
     flex: 0 0 100%;
   }
-  .post-list-item h2 {
+  .post-list h2 {
      margin-bottom: var(--spacing-2);
    }
 }
