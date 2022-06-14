@@ -6,13 +6,17 @@ const Posts = ({ posts }) => {
   return (
     <ol className="post-list">
       {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.slug;
+        const title = node.frontmatter.title || node.fields.slug;
         return (
-          <li key={node.slug} itemScope itemType="http://schema.org/Article">
+          <li
+            key={`posts/${node.fields.category}/${node.fields.slug}`}
+            itemScope
+            itemType="http://schema.org/Article"
+          >
             <header>
               <h2>
                 <Link
-                  to={`/posts/${node.fields.category}/${node.slug}`}
+                  to={`/posts/${node.fields.category}/${node.fields.slug}`}
                   itemProp="url"
                 >
                   <span itemProp="headline">{title}</span>

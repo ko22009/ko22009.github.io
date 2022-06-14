@@ -13,7 +13,7 @@ function useCountView(slug, update = false) {
     async function updateCount() {
       setLoading(true);
       const db = getFirestore();
-      const collectionViews = collection(db, "post");
+      const collectionViews = collection(db, "posts");
       const refViews = doc(collectionViews, slug);
       try {
         if (update) {

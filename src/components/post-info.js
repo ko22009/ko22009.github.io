@@ -9,9 +9,12 @@ import Tag from "./tag";
 
 const PostInfo = ({ node }) => {
   const tags = node.frontmatter.tags;
-  const title = node.frontmatter.title || node.slug;
-  const [count] = useCountView(node.slug, false);
-  const disqusConfig = { identifier: node.slug, title: title };
+  const title = node.frontmatter.title || node.fields.slug;
+  const [count] = useCountView(
+    `${node.fields.category}-${node.fields.slug}`,
+    false
+  );
+  const disqusConfig = { identifier: node.fields.slug, title: title };
 
   return (
     <>
@@ -23,8 +26,8 @@ const PostInfo = ({ node }) => {
         </div>
         <ClapButton
           component={Medium}
-          namespace="ko2-blog-post"
-          id={node.slug.slice(0, -1)}
+          namespace={`ko2-blog`}
+          id={`${node.fields.category}-${node.fields.slug}`}
         ></ClapButton>
         <div className="element-info">
           <CommentCount placeholder={"0"} config={disqusConfig} />

@@ -55,8 +55,8 @@ export const pageQuery = graphql`
       edges {
         node {
           excerpt
-          slug
           fields {
+            slug
             category
           }
           frontmatter {

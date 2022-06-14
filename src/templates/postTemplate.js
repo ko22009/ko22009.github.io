@@ -21,8 +21,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
       <PostInfo node={post} />
     </>
   );
-
-  useCountView(post.slug, true);
+  useCountView(`${post.fields.category}-${post.fields.slug}`, true);
 
   useEffect(() => {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -37,7 +36,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
   }, []);
 
   const disqusConfig = {
-    identifier: post.slug,
+    identifier: post.fields.slug,
     title: post.frontmatter.title,
   };
 
@@ -78,7 +77,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
                 <li>
                   {previous && (
                     <Link
-                      to={`/posts/${previous.fields.category}/${previous.slug}`}
+                      to={`/posts/${previous.fields.category}/${previous.fields.slug}`}
                       rel="prev"
                     >
                       ← {previous.frontmatter.title}
@@ -88,7 +87,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
                 <li>
                   {next && (
                     <Link
-                      to={`/posts/${next.fields.category}/${next.slug}`}
+                      to={`/posts/${previous.fields.category}/${next.fields.slug}`}
                       rel="next"
                     >
                       {next.frontmatter.title} →
@@ -118,12 +117,15 @@ export const pageQuery = graphql`
         title
       }
     }
-    mdx(slug: { eq: $slug }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
       tableOfContents
       body
-      slug
+      fields {
+        category
+        slug
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

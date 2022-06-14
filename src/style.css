@@ -570,3 +570,7 @@ code[class*="language-"], pre[class*="language-"] {
     list-style-position: inside;
   }
 }
+
+.mt-6 {
+  margin-top: var(--spacing-6) !important;
+}

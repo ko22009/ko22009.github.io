@@ -16,9 +16,9 @@ exports.createPages = ({ graphql, actions }) => {
           edges {
             node {
               id
-              slug
               fields {
                 category
+                slug
               }
               frontmatter {
                 title
@@ -33,15 +33,14 @@ exports.createPages = ({ graphql, actions }) => {
     if (result.errors) {
       throw result.errors;
     }
-
-    // Create blog posts pages.
     const posts = result.data.allMdx.edges;
     const category = posts.reduce((acc, val) => {
-      if (!acc.includes(val)) {
+      if (!acc.includes(val.node.fields.category)) {
         acc.push(val.node.fields.category);
       }
       return acc;
     }, []);
+
     category.map((category) => {
       createPage({
         path: `/posts/${category}`,
@@ -57,10 +56,12 @@ exports.createPages = ({ graphql, actions }) => {
         index === posts.length - 1 ? null : posts[index + 1].node;
       const next = index === 0 ? null : posts[index - 1].node;
       createPage({
-        path: `/posts/${post.node.fields.category}/${post.node.slug}`,
+        path: `/posts/${post.node.fields.category}/${
+          post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1]
+        }`,
         component: postTemplate,
         context: {
-          slug: post.node.slug,
+          slug: post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1],
           category: post.node.fields.category,
           previous,
           next,
@@ -77,12 +78,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: value.match(/([a-z\d-]+)(\/*|)$/i)[1],
     });
     createNodeField({
       name: `category`,
       node,
-      value: getNode(node.parent).sourceInstanceName.replace("-", " "),
+      value: value.split("/")[1],
     });
   }
 };
