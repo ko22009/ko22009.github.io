@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   getFirestore,
   collection,
@@ -9,7 +9,9 @@ import {
 function useCountView(slug, update = false) {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const mounted = useRef(false);
   useEffect(() => {
+    mounted.current = true;
     async function updateCount() {
       setLoading(true);
       const db = getFirestore();
@@ -21,21 +23,31 @@ function useCountView(slug, update = false) {
             const doc = await t.get(refViews);
             const oldView = doc.data()?.view;
             const view = oldView !== undefined ? oldView + 1 : 0;
-            setCount(view);
             t.set(refViews, { view });
+            if (mounted.current) {
+              setCount(view);
+              setLoading(false);
+            }
           });
         } else {
           await runTransaction(db, async (t) => {
             const doc = await t.get(refViews);
             const view = doc.data()?.view;
-            setCount(view || 0);
+            if (mounted.current) {
+              setCount(view || 0);
+              setLoading(false);
+            }
           });
         }
-      } catch {}
-      setLoading(false);
+      } catch {
+        if (mounted.current) {
+          setLoading(false);
+        }
+      }
     }
     updateCount();
-  }, [slug, update]);
+    return () => (mounted.current = false);
+  }, [slug, update, mounted]);
   return [count, loading];
 }
 

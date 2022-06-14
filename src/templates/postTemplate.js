@@ -87,7 +87,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
                 <li>
                   {next && (
                     <Link
-                      to={`/posts/${previous.fields.category}/${next.fields.slug}`}
+                      to={`/posts/${next.fields.category}/${next.fields.slug}`}
                       rel="next"
                     >
                       {next.frontmatter.title} →
@@ -111,13 +111,13 @@ const PostTemplate = ({ data, location, pageContext }) => {
 export default PostTemplate;
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostBySlug($slug: String!, $category: String!) {
     site {
       siteMetadata {
         title
       }
     }
-    mdx(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug }, category: { eq: $category } }) {
       id
       excerpt(pruneLength: 160)
       tableOfContents
