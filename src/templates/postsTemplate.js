@@ -10,7 +10,7 @@ const PostsTemplate = ({ data, pageContext: { category } }) => {
   const location = `/posts/${category}`;
   const Subheader = () => (
     <>
-      <h1 itemProp="headline">Posts</h1>
+      <h1 itemProp="headline">{category.toUpperCase()}</h1>
     </>
   );
   if (posts.length === 0) {
