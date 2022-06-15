@@ -13,7 +13,7 @@ import { Disqus } from "gatsby-plugin-disqus";
 const PostTemplate = ({ data, location, pageContext }) => {
   const post = data.mdx;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
-  const { previous, next } = pageContext;
+  const { previous, next, categoryTitle } = pageContext;
 
   const Subheader = () => (
     <>
@@ -48,7 +48,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
       title={siteTitle}
     >
       <Seo
-        title={post.frontmatter.title}
+        title={`${categoryTitle}: ${post.frontmatter.title}`}
         description={post.frontmatter.description || post.excerpt}
       />
       <article

@@ -57,7 +57,7 @@
   --color-primary: #141f2a;
   --color-secondary: #1e2d3b;
   --color-button: #2a2e31;
-  --color-button-hover: #42484d;
+  --color-button-hover: #3d4348;
   --color-text: #d9d9d9;
   --color-light: #b0a3a3;
 }
@@ -327,8 +327,17 @@ code[class*="language-"], pre[class*="language-"] {
   margin-bottom: var(--spacing-2);
 }
 
+.tag-primary {
+  background: #0b3b52;
+  color: var(--color-main);
+}
+
 .bg-wrapper .tag {
   background: var(--color-button-hover);
+}
+
+.bg-wrapper .tag-primary {
+  background: #105577;
 }
 
 .token.punctuation {
@@ -439,6 +448,7 @@ code[class*="language-"], pre[class*="language-"] {
   display: flex;
   align-items: center;
   color: var(--color-main);
+  padding-bottom: var(--spacing-2);
 }
 
 .bio {
@@ -455,6 +465,9 @@ code[class*="language-"], pre[class*="language-"] {
 }
 
 @media (max-width: 42rem) {
+  .data {
+    padding-bottom: 0;
+  }
   .data > div:nth-child(2):before {
     border: none;
     margin: 0;
@@ -573,4 +586,11 @@ code[class*="language-"], pre[class*="language-"] {
 
 .mt-6 {
   margin-top: var(--spacing-6) !important;
+}
+
+.title-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  line-height: var(--lineHeight-tight);
 }

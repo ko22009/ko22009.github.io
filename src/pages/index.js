@@ -7,7 +7,7 @@ import Posts from "../components/posts";
 
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
-  const groups = data.allMdx.group;
+  const edges = data.allMdx.edges;
 
   const Footer = () => (
     <footer>
@@ -25,16 +25,7 @@ const BlogIndex = ({ data, location }) => {
       Footer={Footer}
     >
       <Seo />
-      {groups.map((group) => (
-        <div key={group.fieldValue}>
-          <h2 className="title">
-            <a href={`/posts/${group.fieldValue}`}>
-              {group.fieldValue.toUpperCase()}
-            </a>
-          </h2>
-          <Posts posts={group.edges} />
-        </div>
-      ))}
+      <Posts posts={edges} />
     </Layout>
   );
 };
@@ -48,23 +39,22 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
-      group(field: fields___category) {
-        fieldValue
-        totalCount
-        edges {
-          node {
-            excerpt
-            fields {
-              category
-              slug
-            }
-            frontmatter {
-              date(formatString: "MMMM DD, YYYY")
-              title
-              description
-              tags
-            }
+    allMdx(
+      filter: { fileAbsolutePath: { regex: "/index.md$/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      edges {
+        node {
+          excerpt
+          fields {
+            category
+            slug
+          }
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            description
+            tags
           }
         }
       }

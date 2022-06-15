@@ -14,14 +14,16 @@ const Posts = ({ posts }) => {
             itemType="http://schema.org/Article"
           >
             <header>
-              <h2>
-                <Link
-                  to={`/posts/${node.fields.category}/${node.fields.slug}`}
-                  itemProp="url"
-                >
-                  <span itemProp="headline">{title}</span>
-                </Link>
-              </h2>
+              <div className="title-header">
+                <h2>
+                  <Link
+                    to={`/posts/${node.fields.category}/${node.fields.slug}`}
+                    itemProp="url"
+                  >
+                    <span itemProp="headline">{title}</span>
+                  </Link>
+                </h2>
+              </div>
               <PostInfo node={node} />
             </header>
             <section>

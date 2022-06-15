@@ -5,12 +5,12 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import * as React from "react";
+import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
 
-const Seo = ({ description, lang, meta, titleProp }) => {
+const Seo = ({ description, lang, meta, title }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -25,18 +25,18 @@ const Seo = ({ description, lang, meta, titleProp }) => {
         }
       }
     `
-  )
+  );
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
-  const title = titleProp ? `${titleProp} | ${defaultTitle}` : defaultTitle;
+  const metaDescription = description || site.siteMetadata.description;
+  const defaultTitle = site.siteMetadata?.title;
+  const customTitle = title ? `${title} | ${defaultTitle}` : defaultTitle;
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
+      title={customTitle}
       meta={[
         {
           name: `description`,
@@ -44,7 +44,7 @@ const Seo = ({ description, lang, meta, titleProp }) => {
         },
         {
           property: `og:title`,
-          content: title,
+          content: customTitle,
         },
         {
           property: `og:description`,
@@ -64,7 +64,7 @@ const Seo = ({ description, lang, meta, titleProp }) => {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: customTitle,
         },
         {
           name: `twitter:description`,
@@ -72,20 +72,20 @@ const Seo = ({ description, lang, meta, titleProp }) => {
         },
       ].concat(meta)}
     />
-  )
-}
+  );
+};
 
 Seo.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-}
+};
 
 Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   titleProp: PropTypes.string,
-}
+};
 
-export default Seo
+export default Seo;

@@ -1,6 +1,23 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type === `Mdx`) {
+    const value = createFilePath({ node, getNode });
+    createNodeField({
+      name: `slug`,
+      node,
+      value: value.match(/([a-z\d-]+)(\/*|)$/i)[1],
+    });
+    createNodeField({
+      name: `category`,
+      node,
+      value: value.split("/")[1],
+    });
+  }
+};
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -11,6 +28,7 @@ exports.createPages = ({ graphql, actions }) => {
       {
         allMdx(
           sort: { fields: [frontmatter___date], order: DESC }
+          filter: { fileAbsolutePath: { regex: "/index.md$/" } }
           limit: 1000
         ) {
           edges {
@@ -29,24 +47,43 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `
-  ).then((result) => {
+  ).then(async (result) => {
     if (result.errors) {
       throw result.errors;
     }
     const posts = result.data.allMdx.edges;
-    const category = posts.reduce((acc, val) => {
-      if (!acc.includes(val.node.fields.category)) {
-        acc.push(val.node.fields.category);
-      }
-      return acc;
-    }, []);
 
-    category.map((category) => {
+    const categoryResults = await graphql(
+      `
+        {
+          allMdx(filter: { fileAbsolutePath: { regex: "/category.md$/" } }) {
+            edges {
+              node {
+                id
+                fields {
+                  category
+                  slug
+                }
+                frontmatter {
+                  title
+                }
+                body
+              }
+            }
+          }
+        }
+      `
+    );
+
+    const categoryEdges = categoryResults.data.allMdx.edges;
+
+    categoryEdges.map((edge) => {
       createPage({
-        path: `/posts/${category}`,
+        path: `/posts/${edge.node.fields.category}`,
         component: postsTemplate,
         context: {
-          category,
+          category: edge.node.fields.category,
+          categoryTitle: edge.node.frontmatter.title,
         },
       });
     });
@@ -55,6 +92,11 @@ exports.createPages = ({ graphql, actions }) => {
       const previous =
         index === posts.length - 1 ? null : posts[index + 1].node;
       const next = index === 0 ? null : posts[index - 1].node;
+      const category = categoryEdges.find(
+        (edge) =>
+          edge.node.fields.slug === "category" &&
+          edge.node.fields.category === post.node.fields.category
+      );
       createPage({
         path: `/posts/${post.node.fields.category}/${
           post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1]
@@ -63,27 +105,11 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           slug: post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1],
           category: post.node.fields.category,
+          categoryTitle: category.node.frontmatter.title,
           previous,
           next,
         },
       });
     });
   });
-};
-
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions;
-  if (node.internal.type === `Mdx`) {
-    const value = createFilePath({ node, getNode });
-    createNodeField({
-      name: `slug`,
-      node,
-      value: value.match(/([a-z\d-]+)(\/*|)$/i)[1],
-    });
-    createNodeField({
-      name: `category`,
-      node,
-      value: value.split("/")[1],
-    });
-  }
 };

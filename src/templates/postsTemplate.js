@@ -4,13 +4,13 @@ import Layout from "../components/layout";
 import Posts from "../components/posts";
 import Seo from "../components/seo";
 
-const PostsTemplate = ({ data, pageContext: { category } }) => {
+const PostsTemplate = ({ data, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title;
   const posts = data.allMdx.edges;
-  const location = `/posts/${category}`;
+  const location = `/posts/${pageContext.category}`;
   const Subheader = () => (
     <>
-      <h1 itemProp="headline">{category.toUpperCase()}</h1>
+      <h1 itemProp="headline">{pageContext.categoryTitle}</h1>
     </>
   );
   if (posts.length === 0) {
@@ -33,7 +33,7 @@ const PostsTemplate = ({ data, pageContext: { category } }) => {
       location={location}
       title={siteTitle}
     >
-      <Seo />
+      <Seo title={pageContext.categoryTitle} />
       <Posts posts={posts} />
     </Layout>
   );
@@ -49,7 +49,10 @@ export const pageQuery = graphql`
       }
     }
     allMdx(
-      filter: { fields: { category: { eq: $category } } }
+      filter: {
+        fields: { category: { eq: $category } }
+        fileAbsolutePath: { regex: "/index.md$/" }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {

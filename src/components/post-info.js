@@ -6,6 +6,7 @@ import { faEye, faComment } from "@fortawesome/free-solid-svg-icons";
 import { Medium } from "./Medium";
 import { CommentCount } from "gatsby-plugin-disqus";
 import Tag from "./tag";
+import { Link } from "gatsby";
 
 const PostInfo = ({ node }) => {
   const tags = node.frontmatter.tags;
@@ -34,6 +35,11 @@ const PostInfo = ({ node }) => {
           <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faComment} />
         </div>
       </div>
+      <Tag primary={true}>
+        <Link to={"/posts/" + node.fields.category}>
+          {node.fields.category}
+        </Link>
+      </Tag>
       {tags?.map((tag) => (
         <Tag key={tag}>{tag}</Tag>
       ))}
