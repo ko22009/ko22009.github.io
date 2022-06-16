@@ -10,14 +10,14 @@ import PostInfo from "../components/post-info";
 import useCountView from "../hook/useCountView";
 import { Disqus } from "gatsby-plugin-disqus";
 
-const PostTemplate = ({ data, location, pageContext }) => {
+const PostTemplate = ({ data, pageContext }) => {
   const post = data.mdx;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const { previous, next, categoryTitle } = pageContext;
 
   const Subheader = () => (
     <>
-      <h1 itemProp="headline">{post.frontmatter.title}</h1>
+      <h2 className="header">{post.frontmatter.title}</h2>
       <PostInfo node={post} />
     </>
   );
@@ -41,12 +41,7 @@ const PostTemplate = ({ data, location, pageContext }) => {
   };
 
   return (
-    <Layout
-      className="post"
-      Subheader={Subheader}
-      location={location}
-      title={siteTitle}
-    >
+    <Layout className="post" Subheader={Subheader} title={siteTitle}>
       <Seo
         title={`${categoryTitle}: ${post.frontmatter.title}`}
         description={post.frontmatter.description || post.excerpt}

@@ -7,15 +7,14 @@ import Seo from "../components/seo";
 const PostsTemplate = ({ data, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title;
   const posts = data.allMdx.edges;
-  const location = `/posts/${pageContext.category}`;
   const Subheader = () => (
     <>
-      <h1 itemProp="headline">{pageContext.categoryTitle}</h1>
+      <h2 className="header">{pageContext.categoryTitle}</h2>
     </>
   );
   if (posts.length === 0) {
     return (
-      <Layout location={location} title={siteTitle}>
+      <Layout title={siteTitle}>
         <Seo title="All posts" />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
@@ -27,12 +26,7 @@ const PostsTemplate = ({ data, pageContext }) => {
   }
 
   return (
-    <Layout
-      Subheader={Subheader}
-      className="layout"
-      location={location}
-      title={siteTitle}
-    >
+    <Layout Subheader={Subheader} className="layout" title={siteTitle}>
       <Seo title={pageContext.categoryTitle} />
       <Posts posts={posts} />
     </Layout>

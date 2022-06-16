@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Front-end developer blog`,
+    title: `Front-end blog`,
     siteUrl: `https://ko22009.github.io`,
     author: {
       name: `Kutliakhmetov Ruslan`,
