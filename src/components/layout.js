@@ -6,7 +6,14 @@ import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useStaticQuery, graphql } from "gatsby";
 import cn from "classnames";
 
-const Layout = ({ title, children, Subheader, className, Footer }) => {
+const Layout = ({
+  title,
+  children,
+  Subheader,
+  className,
+  Footer,
+  location,
+}) => {
   let header;
   const buttonRef = useRef(null);
   const data = useStaticQuery(graphql`
@@ -19,11 +26,10 @@ const Layout = ({ title, children, Subheader, className, Footer }) => {
     }
   `);
   const groups = data.allMdx.group;
-  console.log(window.location.pathname);
   header = (
     <div className="main-heading">
       <Link
-        className={cn(window.location.pathname === "/" && "active", "main")}
+        className={cn(location.pathname === "/" && "active", "main")}
         to="/"
       >
         {title}
@@ -32,8 +38,7 @@ const Layout = ({ title, children, Subheader, className, Footer }) => {
         <Link
           key={group.fieldValue}
           className={cn(
-            window.location.pathname.includes(`/posts/${group.fieldValue}`) &&
-              "active"
+            location.pathname.includes(`/posts/${group.fieldValue}`) && "active"
           )}
           to={`/posts/${group.fieldValue}`}
         >

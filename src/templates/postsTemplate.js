@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import Posts from "../components/posts";
 import Seo from "../components/seo";
 
-const PostsTemplate = ({ data, pageContext }) => {
+const PostsTemplate = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata?.title;
   const posts = data.allMdx.edges;
   const Subheader = () => (
@@ -26,7 +26,12 @@ const PostsTemplate = ({ data, pageContext }) => {
   }
 
   return (
-    <Layout Subheader={Subheader} className="layout" title={siteTitle}>
+    <Layout
+      Subheader={Subheader}
+      location={location}
+      className="layout"
+      title={siteTitle}
+    >
       <Seo title={pageContext.categoryTitle} />
       <Posts posts={posts} />
     </Layout>

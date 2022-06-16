@@ -5,7 +5,7 @@ import Seo from "../components/seo";
 import Bio from "../components/bio";
 import Posts from "../components/posts";
 
-const BlogIndex = ({ data }) => {
+const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const edges = data.allMdx.edges;
 
@@ -18,7 +18,12 @@ const BlogIndex = ({ data }) => {
   );
 
   return (
-    <Layout className="layout" title={siteTitle} Footer={Footer}>
+    <Layout
+      className="layout"
+      location={location}
+      title={siteTitle}
+      Footer={Footer}
+    >
       <Seo />
       <h2 className="header">Recently posts</h2>
       <Posts posts={edges} />
