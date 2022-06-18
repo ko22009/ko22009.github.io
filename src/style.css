@@ -518,10 +518,19 @@ code[class*="language-"], pre[class*="language-"] {
   position: fixed;
   right: var(--spacing-4);
   width: 80px;
-  bottom: 0;
+  bottom: var(--spacing-4);
   margin-bottom: var(--spacing-4);
   display: none;
   z-index: 2;
+  margin-left: auto;
+}
+
+.desktop {
+  margin-right: auto;
+  margin-left: 0;
+  position: absolute;
+  left: 0;
+  bottom: 30px;
 }
 
 .go-up-full {

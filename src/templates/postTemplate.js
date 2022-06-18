@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import PostInfo from "../components/post-info";
 import useCountView from "../hook/useCountView";
 import { Disqus } from "gatsby-plugin-disqus";
+import ScrollUp from "../components/scrollUp";
 
 const PostTemplate = ({ data, pageContext, location }) => {
   const post = data.mdx;
@@ -101,6 +102,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
           </div>
           <nav className={cn("toc", !post.tableOfContents.items && "hide")}>
             <Toc post={post.tableOfContents} />
+            <ScrollUp className="desktop" />
           </nav>
         </div>
       </article>
