@@ -18,6 +18,22 @@ module.exports = {
     },
   },
   plugins: [
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://ko22009.github.io/",
+        sitemap: "https://ko22009.github.io/sitemap/sitemap-index.xml",
+        resolveEnv: () => process.env.NODE_ENV,
+        env: {
+          development: {
+            policy: [{ userAgent: "*", disallow: ["/"] }],
+          },
+          production: {
+            policy: [{ userAgent: "*", allow: "/" }],
+          },
+        },
+      },
+    },
     "gatsby-plugin-image",
     {
       resolve: "gatsby-source-filesystem",
