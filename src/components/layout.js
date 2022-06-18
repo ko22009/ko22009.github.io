@@ -15,7 +15,7 @@ const Layout = ({
   let header;
   const data = useStaticQuery(graphql`
     query MyQuery {
-      allMdx {
+      allMdx(filter: { fileAbsolutePath: { regex: "/category.md$/" } }) {
         group(field: fields___category) {
           fieldValue
         }
@@ -26,7 +26,7 @@ const Layout = ({
   header = (
     <div className="main-heading">
       <Link
-        className={cn(location.pathname === "/" && "active", "main")}
+        className={cn(location?.pathname === "/" && "active", "main")}
         to="/"
       >
         {title}
@@ -35,7 +35,8 @@ const Layout = ({
         <Link
           key={group.fieldValue}
           className={cn(
-            location.pathname.includes(`/posts/${group.fieldValue}`) && "active"
+            location?.pathname.includes(`/posts/${group.fieldValue}`) &&
+              "active"
           )}
           to={`/posts/${group.fieldValue}`}
         >

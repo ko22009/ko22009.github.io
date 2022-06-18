@@ -12,18 +12,6 @@ const PostsTemplate = ({ data, pageContext, location }) => {
       <h2 className="header">{pageContext.categoryTitle}</h2>
     </>
   );
-  if (posts.length === 0) {
-    return (
-      <Layout title={siteTitle}>
-        <Seo title="All posts" />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
-      </Layout>
-    );
-  }
 
   return (
     <Layout
@@ -33,6 +21,13 @@ const PostsTemplate = ({ data, pageContext, location }) => {
       title={siteTitle}
     >
       <Seo title={pageContext.categoryTitle} />
+      {!posts.length && (
+        <p>
+          No blog posts found. Add markdown posts to "content/blog" (or the
+          directory you specified for the "gatsby-source-filesystem" plugin in
+          gatsby-config.js).
+        </p>
+      )}
       <Posts posts={posts} />
     </Layout>
   );

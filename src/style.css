@@ -221,7 +221,7 @@ p {
   line-height: var(--lineHeight-normal);
   --baseline-multiplier: 0.179;
   --x-height-multiplier: 0.35;
-  margin: var(--spacing-0) var(--spacing-0) var(--spacing-2) var(--spacing-0);
+  margin: var(--spacing-2) var(--spacing-0) var(--spacing-2) var(--spacing-0);
   padding: var(--spacing-0);
 }
 

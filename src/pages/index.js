@@ -41,7 +41,10 @@ export const pageQuery = graphql`
       }
     }
     allMdx(
-      filter: { fileAbsolutePath: { regex: "/index.md$/" } }
+      filter: {
+        fileAbsolutePath: { regex: "/index.md$/" }
+        frontmatter: { draft: { ne: true } }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 20
     ) {
