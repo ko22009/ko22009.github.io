@@ -54,6 +54,9 @@ export const pageQuery = graphql`
           fields {
             category
             slug
+            readingTime {
+              text
+            }
           }
           frontmatter {
             date(formatString: "MMMM DD, YYYY hh:mma")

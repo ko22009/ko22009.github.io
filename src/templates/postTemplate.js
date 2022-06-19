@@ -128,6 +128,9 @@ export const pageQuery = graphql`
       fields {
         category
         slug
+        readingTime {
+          text
+        }
       }
       frontmatter {
         title

@@ -1,5 +1,6 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
+const readingTime = require("reading-time");
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
@@ -15,6 +16,13 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value: value.split("/")[1],
     });
+    if (node.internal.content != null) {
+      createNodeField({
+        node,
+        name: "readingTime",
+        value: readingTime(node.internal.content),
+      });
+    }
   }
 };
 

@@ -20,7 +20,9 @@ const PostInfo = ({ node }) => {
   return (
     <>
       <div className="data">
-        <div className="date">{node.frontmatter.date}</div>
+        <div className="date">
+          {node.frontmatter.date}, {node.fields.readingTime?.text}
+        </div>
         <div className="element-info">
           {count}
           <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faEye} />
