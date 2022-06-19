@@ -28,10 +28,7 @@ exports.createPages = ({ graphql, actions }) => {
       {
         allMdx(
           sort: { fields: [frontmatter___date], order: DESC }
-          filter: {
-            fileAbsolutePath: { regex: "/index.md$/" }
-            frontmatter: { draft: { ne: true } }
-          }
+          filter: { fileAbsolutePath: { regex: "/index.md$/" } }
           limit: 1000
         ) {
           edges {
@@ -109,8 +106,8 @@ exports.createPages = ({ graphql, actions }) => {
           slug: post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1],
           category: post.node.fields.category,
           categoryTitle: category?.node.frontmatter.title,
-          previous,
-          next,
+          previous: previous?.frontmatter?.draft ? null : previous,
+          next: next?.frontmatter?.draft ? null : next,
         },
       });
     });

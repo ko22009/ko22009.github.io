@@ -63,7 +63,8 @@ const PostTemplate = ({ data, pageContext, location }) => {
             !post.tableOfContents.items && "content-full"
           )}
         >
-          <div>
+          <div className="inner-content">
+            <p>{post.frontmatter.description}</p>
             <MDXRenderer>{post.body}</MDXRenderer>
             <nav className="blog-post-nav">
               <ul
@@ -130,7 +131,7 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "MMMM DD, YYYY hh:mma")
         description
         tags
       }
