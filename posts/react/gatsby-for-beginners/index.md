@@ -48,4 +48,4 @@ We can add additional data to pages by page's context.
 5. Visit page and show our started project: <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>
 6. For looking View GraphiQL visit: <a href="http://localhost:8000/___graphql" target="_blank">http://localhost:8000/___graphql</a>  
 
-And Read the docs: <a href="https://www.gatsbyjs.com/docs/" target="_blank">https://www.gatsbyjs.com/docs/</a>
+And Read the docs: https://www.gatsbyjs.com/docs/

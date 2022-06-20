@@ -36,7 +36,10 @@ exports.createPages = ({ graphql, actions }) => {
       {
         allMdx(
           sort: { fields: [frontmatter___date], order: DESC }
-          filter: { fileAbsolutePath: { regex: "/index.md$/" } }
+          filter: {
+            fileAbsolutePath: { regex: "/index.md$/" }
+            frontmatter: { draft: { ne: true } }
+          }
           limit: 1000
         ) {
           edges {
@@ -114,10 +117,67 @@ exports.createPages = ({ graphql, actions }) => {
           slug: post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1],
           category: post.node.fields.category,
           categoryTitle: category?.node.frontmatter.title,
-          previous: previous?.frontmatter?.draft ? null : previous,
-          next: next?.frontmatter?.draft ? null : next,
+          previous,
+          next,
         },
       });
     });
+
+    if (process.env.NODE_ENV === "development") {
+      const draftPostsResults = await graphql(
+        `
+          {
+            allMdx(
+              filter: {
+                fileAbsolutePath: { regex: "/index.md$/" }
+                frontmatter: { draft: { eq: true } }
+              }
+            ) {
+              edges {
+                node {
+                  id
+                  fields {
+                    category
+                    slug
+                  }
+                  frontmatter {
+                    draft
+                    title
+                  }
+                  body
+                }
+              }
+            }
+          }
+        `
+      );
+
+      const draftPostsEdges = draftPostsResults.data.allMdx.edges;
+      draftPostsEdges.map((post, index) => {
+        const previous =
+          index === draftPostsEdges.length - 1
+            ? null
+            : draftPostsEdges[index + 1].node;
+        const next = index === 0 ? null : draftPostsEdges[index - 1].node;
+        const category = categoryEdges.find(
+          (edge) =>
+            edge.node.fields.slug === "category" &&
+            edge.node.fields.category === post.node.fields.category
+        );
+        createPage({
+          path: `/posts/${post.node.fields.category}/${
+            post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1]
+          }`,
+          component: postTemplate,
+          context: {
+            slug: post.node.fields.slug.match(/([a-z\d-]+)(\/*|)$/i)[1],
+            category: post.node.fields.category,
+            categoryTitle: category?.node.frontmatter.title,
+            previous,
+            next,
+          },
+        });
+      });
+    }
   });
 };
