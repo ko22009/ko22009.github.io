@@ -223,7 +223,7 @@ p {
 
 ul,
 ol {
-  margin: var(--spacing-0);
+  margin: var(--spacing-4);
   padding: var(--spacing-0);
   padding-top: 1px;
   margin-top: -1px;
@@ -234,6 +234,10 @@ ul li,
 ol li {
   padding-left: var(--spacing-0);
   margin-bottom: var(--spacing-2);
+}
+
+.toc-list {
+  margin: var(--spacing-0);
 }
 
 li > p {
