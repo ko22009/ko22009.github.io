@@ -577,10 +577,6 @@ code[class*="language-"], pre[class*="language-"] {
     padding: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-4);
     margin: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-0);
   }
-  ul,
-  ol {
-    list-style-position: inside;
-  }
 }
 
 .title-header {
