@@ -9,7 +9,7 @@ const PostsTemplate = ({ data, pageContext, location }) => {
   const posts = data.allMdx.edges;
   const Subheader = () => (
     <>
-      <h2 className="header">{pageContext.categoryTitle}</h2>
+      <h1>{pageContext.categoryTitle}</h1>
     </>
   );
 

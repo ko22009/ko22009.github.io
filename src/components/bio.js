@@ -5,12 +5,12 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
-import {useStaticQuery, graphql} from "gatsby"
-import github from '../images/github.svg'
-import mail from '../images/mail.svg'
-import telegram from '../images/telegram.svg'
-import profile from '../images/profile-pic.jpg'
+import * as React from "react";
+import { useStaticQuery, graphql } from "gatsby";
+import github from "../images/github.svg";
+import mail from "../images/mail.svg";
+import telegram from "../images/telegram.svg";
+import profile from "../images/profile-pic.jpg";
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -29,11 +29,11 @@ const Bio = () => {
         }
       }
     }
-  `)
+  `);
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
-  const author = data.site.siteMetadata?.author
-  const social = data.site.siteMetadata?.social
+  const author = data.site.siteMetadata?.author;
+  const social = data.site.siteMetadata?.social;
 
   return (
     <div>
@@ -47,18 +47,25 @@ const Bio = () => {
         />
         {author?.name && (
           <p>
-            Personal front-end blog since {new Date().getFullYear()}<br/>
+            Personal front-end blog since {new Date().getFullYear()}
+            <br />
             Written by <strong>{author.name}:</strong> {author?.summary}
           </p>
         )}
       </blockquote>
       <div className="links">
-        <a href={social.telegram}><img width={30} height={30} src={telegram} alt="telegram"/></a>
-        <a href={social.github}><img width={30} height={30} src={github} alt="github"/></a>
-        <a href={`mailto:${social.mail}`}><img width={30} height={30} src={mail} alt="mail"/></a>
+        <a href={social.telegram} target="_blank" rel="noreferrer">
+          <img width={30} height={30} src={telegram} alt="telegram" />
+        </a>
+        <a href={social.github} target="_blank" rel="noreferrer">
+          <img width={30} height={30} src={github} alt="github" />
+        </a>
+        <a href={`mailto:${social.mail}`} target="_blank" rel="noreferrer">
+          <img width={30} height={30} src={mail} alt="mail" />
+        </a>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Bio
+export default Bio;

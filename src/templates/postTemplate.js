@@ -18,7 +18,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
 
   const Subheader = () => (
     <>
-      <h2 className="header">{post.frontmatter.title}</h2>
+      <h1>{post.frontmatter.title}</h1>
       <PostInfo node={post} />
     </>
   );

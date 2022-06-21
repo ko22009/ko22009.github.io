@@ -4,14 +4,7 @@ import { useStaticQuery, graphql } from "gatsby";
 import cn from "classnames";
 import ScrollUp from "./scrollUp";
 
-const Layout = ({
-  title,
-  children,
-  Subheader,
-  className,
-  Footer,
-  location,
-}) => {
+const Layout = ({ children, Subheader, className, Footer, location }) => {
   let header;
   const data = useStaticQuery(graphql`
     query MyQuery {
@@ -20,9 +13,15 @@ const Layout = ({
           fieldValue
         }
       }
+      site {
+        siteMetadata {
+          title
+        }
+      }
     }
   `);
   const groups = data.allMdx.group;
+  const title = data.site.siteMetadata.title;
   header = (
     <div className="main-heading">
       <Link
@@ -43,6 +42,18 @@ const Layout = ({
           {group.fieldValue}
         </Link>
       ))}
+      <Link
+        className={cn(location?.pathname.includes("/resume") && "active")}
+        to="/resume"
+      >
+        resume
+      </Link>
+      <Link
+        className={cn(location?.pathname.includes("/contacts") && "active")}
+        to="/contacts"
+      >
+        contacts
+      </Link>
     </div>
   );
 
