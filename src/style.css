@@ -62,7 +62,7 @@
   --color-button: #2a2e31;
   --color-button-hover: #3d4348;
   --color-text: #d9d9d9;
-  --color-light: #9d9999;
+  --color-light: #8d8d8d;
 }
 
 /* HTML elements */
@@ -554,6 +554,7 @@ code[class*="language-"], pre[class*="language-"] {
   font-size: var(--fontSize-1);
   display: flex;
   gap: 12px;
+  position: relative;
 }
 
 .main-heading a {
@@ -579,6 +580,7 @@ code[class*="language-"], pre[class*="language-"] {
 .main-heading a.main {
   margin-left: calc(var(--spacing-4) * -1);
   padding-left: var(--spacing-4);
+  z-index: 2;
 }
 
 .main-heading a.main.active {
@@ -630,5 +632,112 @@ code[class*="language-"], pre[class*="language-"] {
   }
   .flat tr td:not(:first-child) {
     background: transparent;
+  }
+}
+
+.menu-bg {
+  display: none;
+}
+
+@media (max-width: 42rem) {
+  .menu {
+    position: absolute;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: none;
+    z-index: 2;
+  }
+
+  .hamburger {
+    position: absolute;
+    display: block;
+    top: 50%;
+    right: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--color-main);
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    -webkit-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+  }
+
+  .hamburger:after, .hamburger:before {
+    -webkit-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--color-main);
+  }
+
+  .hamburger:before { top: -10px; }
+
+  .hamburger:after { bottom: -10px; }
+
+  .active .menu > .hamburger {
+    transform: rotate(45deg);
+  }
+
+  .active .menu > .hamburger:after {
+    transform: rotate(90deg);
+    bottom: 0;
+  }
+
+  .active .menu > .hamburger:before {
+    transform: rotate(90deg);
+    top: 0;
+  }
+
+  .active > .menu-bg {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: rgba(42, 46, 49, 0.9);
+    backdrop-filter: blur(2px);
+  }
+
+  .active > .menu-bg {
+    display: block;
+  }
+
+  .active > .menu-bg .menu-item {
+    display: block;
+    font-size: var(--fontSize-3);
+  }
+
+  .mobile-menu {
+    top: 60px;
+    left: var(--spacing-2);
+    position: absolute;
+    display: none;
+    user-select: none;
+  }
+
+  .active > .menu-bg .mobile-menu {
+    display: block;
+  }
+
+  .mobile-menu .menu-item.active {
+    background: none;
+  }
+
+  .mobile-menu .menu-item:hover {
+    background: none;
+  }
+
+  .menu-item {
+    display: none;
+  }
+
+  .menu {
+    display: block;
   }
 }
