@@ -15,7 +15,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
   const post = data.mdx;
   const siteTitle = data.site.siteMetadata?.title || `Title`;
   const { previous, next, categoryTitle } = pageContext;
-
+  const title = categoryTitle ?? post.fields.category;
   const Subheader = () => (
     <>
       <h1>{post.frontmatter.title}</h1>
@@ -49,7 +49,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
       title={siteTitle}
     >
       <Seo
-        title={`${categoryTitle}: ${post.frontmatter.title}`}
+        title={`${title}: ${post.frontmatter.title}`}
         description={post.frontmatter.description || post.excerpt}
       />
       <article
