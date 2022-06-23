@@ -3,11 +3,9 @@ import { Link } from "gatsby";
 import { useStaticQuery, graphql } from "gatsby";
 import cn from "classnames";
 import ScrollUp from "./scrollUp";
-import { useRef } from "react";
 
 const Layout = ({ children, Subheader, className, Footer, location }) => {
   let header;
-  const headerRef = useRef();
   const data = useStaticQuery(graphql`
     query MyQuery {
       allMdx(filter: { fileAbsolutePath: { regex: "/category.md$/" } }) {
@@ -60,7 +58,7 @@ const Layout = ({ children, Subheader, className, Footer, location }) => {
     </>
   );
   header = (
-    <div ref={headerRef} className="main-heading">
+    <div className="main-heading">
       <Link
         className={cn(location?.pathname === "/" && "active", "main")}
         to="/"
@@ -68,11 +66,11 @@ const Layout = ({ children, Subheader, className, Footer, location }) => {
         {title}
       </Link>
       {menu}
-      <div
-        className="menu"
-        onClick={() => headerRef.current.classList.toggle("active")}
-      >
-        <div className="hamburger"></div>
+      <input className="checkbox" type="checkbox" name="" id="" />
+      <div className="hamburger-lines">
+        <span className="line line1"></span>
+        <span className="line line2"></span>
+        <span className="line line3"></span>
       </div>
       <div className="menu-bg">
         <div className="mobile-menu">{menu}</div>
