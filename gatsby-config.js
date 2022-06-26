@@ -17,6 +17,7 @@ module.exports = {
       github: `https://github.com/ko22009`,
       mail: `ko22009@yandex.ru`,
       linkedin: "https://www.linkedin.com/in/ko22009/",
+      twitter: `https://twitter.com/ko22009`,
     },
   },
   plugins: [

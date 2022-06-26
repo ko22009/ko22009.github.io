@@ -4,6 +4,7 @@ import github from "../images/github.svg";
 import mail from "../images/mail.svg";
 import linkedin from "../images/linkedin.svg";
 import telegram from "../images/telegram.svg";
+import twitter from "../images/twitter.svg";
 import profile from "../images/profile-pic.jpg";
 
 const Bio = () => {
@@ -20,6 +21,7 @@ const Bio = () => {
             github
             mail
             linkedin
+            twitter
           }
         }
       }
@@ -59,6 +61,9 @@ const Bio = () => {
         </a>
         <a href={social.linkedin} target="_blank" rel="noreferrer">
           <img width={30} height={30} src={linkedin} alt="linkedin" />
+        </a>
+        <a href={social.twitter} target="_blank" rel="noreferrer">
+          <img width={30} height={30} src={twitter} alt="twitter" />
         </a>
       </div>
     </div>

@@ -46,6 +46,12 @@ const Contacts = ({ location }) => {
           https://www.linkedin.com/in/ko22009/
         </a>
       </p>
+      <p>
+        twitter:{" "}
+        <a href="https://twitter.com/ko22009" target="_blank" rel="noreferrer">
+          https://twitter.com/ko22009
+        </a>
+      </p>
     </Layout>
   );
 };
