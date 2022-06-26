@@ -9,8 +9,9 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
+import image from "../images/gatsby-icon.png";
 
-const Seo = ({ description, lang, meta, title }) => {
+const Seo = ({ description, lang, meta, title, summary, keywords }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -18,6 +19,7 @@ const Seo = ({ description, lang, meta, title }) => {
           siteMetadata {
             title
             description
+            keywords
             social {
               telegram
             }
@@ -43,6 +45,10 @@ const Seo = ({ description, lang, meta, title }) => {
           content: metaDescription,
         },
         {
+          name: `keywords`,
+          content: keywords ?? site.siteMetadata.keywords,
+        },
+        {
           property: `og:title`,
           content: customTitle,
         },
@@ -55,8 +61,12 @@ const Seo = ({ description, lang, meta, title }) => {
           content: `website`,
         },
         {
+          property: `og:image`,
+          content: image,
+        },
+        {
           name: `twitter:card`,
-          content: `summary`,
+          content: summary ?? "",
         },
         {
           name: `twitter:creator`,
@@ -65,6 +75,10 @@ const Seo = ({ description, lang, meta, title }) => {
         {
           name: `twitter:title`,
           content: customTitle,
+        },
+        {
+          name: `twitter:image`,
+          content: image,
         },
         {
           name: `twitter:description`,

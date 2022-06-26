@@ -16,7 +16,7 @@ const Contacts = ({ location }) => {
 
   return (
     <Layout className="layout" location={location} Footer={Footer}>
-      <Seo title={siteTitle} />
+      <Seo title={siteTitle} summary={"Contact information"} />
       <h1>{siteTitle}</h1>
       <p>
         telegram:{" "}
@@ -34,6 +34,16 @@ const Contacts = ({ location }) => {
         email:{" "}
         <a href="mailto:ko22009@yandex.ru" target="_blank" rel="noreferrer">
           ko22009@yandex.ru
+        </a>
+      </p>
+      <p>
+        linkedin:{" "}
+        <a
+          href="https://www.linkedin.com/in/ko22009/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          https://www.linkedin.com/in/ko22009/
         </a>
       </p>
     </Layout>

@@ -1,14 +1,8 @@
-/**
- * Bio component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import * as React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import github from "../images/github.svg";
 import mail from "../images/mail.svg";
+import linkedin from "../images/linkedin.svg";
 import telegram from "../images/telegram.svg";
 import profile from "../images/profile-pic.jpg";
 
@@ -25,13 +19,13 @@ const Bio = () => {
             telegram
             github
             mail
+            linkedin
           }
         }
       }
     }
   `);
 
-  // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author;
   const social = data.site.siteMetadata?.social;
 
@@ -62,6 +56,9 @@ const Bio = () => {
         </a>
         <a href={`mailto:${social.mail}`} target="_blank" rel="noreferrer">
           <img width={30} height={30} src={mail} alt="mail" />
+        </a>
+        <a href={social.linkedin} target="_blank" rel="noreferrer">
+          <img width={30} height={30} src={linkedin} alt="linkedin" />
         </a>
       </div>
     </div>

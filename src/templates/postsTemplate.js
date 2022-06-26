@@ -20,7 +20,11 @@ const PostsTemplate = ({ data, pageContext, location }) => {
       className="layout"
       title={siteTitle}
     >
-      <Seo title={pageContext.categoryTitle} />
+      <Seo
+        title={pageContext.categoryTitle}
+        summary={siteTitle}
+        keywords={pageContext.categoryTitle}
+      />
       {!posts.length && (
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the

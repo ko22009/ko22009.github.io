@@ -36,6 +36,8 @@ const PostTemplate = ({ data, pageContext, location }) => {
     });
   }, []);
 
+  const keywords = [title, ...post.frontmatter.tags];
+
   const disqusConfig = {
     identifier: post.fields.slug,
     title: post.frontmatter.title,
@@ -51,6 +53,8 @@ const PostTemplate = ({ data, pageContext, location }) => {
       <Seo
         title={`${title}: ${post.frontmatter.title}`}
         description={post.frontmatter.description || post.excerpt}
+        keywords={keywords.join(", ")}
+        summary={post.frontmatter.description || post.excerpt}
       />
       <article
         className="blog-post"

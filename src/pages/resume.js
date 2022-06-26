@@ -16,7 +16,11 @@ const Resume = ({ location }) => {
 
   return (
     <Layout className="layout" location={location} Footer={Footer}>
-      <Seo title={siteTitle} />
+      <Seo
+        title={siteTitle}
+        keywords="resume, front-end, senior, js, react"
+        summary={"Resume Kutliakhmetov Ruslan"}
+      />
       <h1>{siteTitle}</h1>
       <p>
         Senior front-end developer, <i>team lead</i>

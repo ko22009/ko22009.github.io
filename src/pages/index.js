@@ -18,7 +18,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout className="layout" location={location} Footer={Footer}>
-      <Seo />
+      <Seo summary={"Last news about front-end"} />
       <h1>Recently posts</h1>
       <Posts posts={edges} />
     </Layout>

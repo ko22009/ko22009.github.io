@@ -6,15 +6,17 @@ module.exports = {
   siteMetadata: {
     title: `Front-end blog`,
     siteUrl: `https://ko22009.github.io`,
+    keywords: `js, javascript, react, graph-ql, gatsby, css, html, nextjs`,
     author: {
       name: `Kutliakhmetov Ruslan`,
       summary: `Striving for Excellence.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `It's personal front-end blog by Kutliakhmetov Ruslan, designed for sharing experience.`,
     social: {
       telegram: `https://t.me/ko22009`,
       github: `https://github.com/ko22009`,
       mail: `ko22009@yandex.ru`,
+      linkedin: "https://www.linkedin.com/in/ko22009/",
     },
   },
   plugins: [
