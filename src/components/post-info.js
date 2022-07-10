@@ -1,9 +1,7 @@
 import * as React from "react";
-import { ClapButton } from "@lyket/react";
 import useCountView from "../hook/useCountView";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faComment } from "@fortawesome/free-solid-svg-icons";
-import { Medium } from "./Medium";
 import { CommentCount } from "gatsby-plugin-disqus";
 import Tag from "./tag";
 import { Link } from "gatsby";
@@ -27,11 +25,6 @@ const PostInfo = ({ node }) => {
           {count}
           <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faEye} />
         </div>
-        <ClapButton
-          component={Medium}
-          namespace={`ko2-blog`}
-          id={`${node.fields.category}-${node.fields.slug}`}
-        ></ClapButton>
         <div className="element-info">
           <CommentCount placeholder={"0"} config={disqusConfig} />
           <FontAwesomeIcon style={{ marginLeft: "6px" }} icon={faComment} />
