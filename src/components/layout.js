@@ -48,6 +48,15 @@ const Layout = ({ children, Subheader, className, Footer, location }) => {
       </Link>
       <Link
         className={cn(
+          location?.pathname.includes("/projects") && "active",
+          "menu-item"
+        )}
+        to="/projects"
+      >
+        projects
+      </Link>
+      <Link
+        className={cn(
           location?.pathname.includes("/contacts") && "active",
           "menu-item"
         )}

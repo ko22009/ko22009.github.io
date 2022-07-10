@@ -1,0 +1,14 @@
+.slider {
+    padding: 0 25px;
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.slick-dots li button:before {
+    color: var(--color-light);
+}
+
+.slick-dots li.slick-active button:before {
+    color: white;
+}
