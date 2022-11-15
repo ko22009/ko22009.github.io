@@ -15,7 +15,7 @@ module.exports = {
     social: {
       telegram: `https://t.me/ko22009`,
       github: `https://github.com/ko22009`,
-      mail: `ko22009@yandex.ru`,
+      mail: `kosid2@gmail.com`,
       linkedin: "https://www.linkedin.com/in/ko22009/",
       twitter: `https://twitter.com/ko22009`,
     },
